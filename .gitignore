@@ -1,0 +1,16 @@
+# Build directories
+build/
+bin/
+obj/
+
+# IDE files
+*.vcxproj*
+*.sln
+*.user
+*.opensdf
+*.sdf
+*.vcxproj.filters
+
+# OS files
+Thumbs.db
+.DS_Store
