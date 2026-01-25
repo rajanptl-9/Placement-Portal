@@ -1,39 +1,84 @@
 package com.example.placement.model.entity;
 
+import com.example.placement.model.entity.enums.AccountStatus;
+import com.example.placement.model.entity.enums.CurrentYear;
+import com.example.placement.model.entity.enums.Degree;
+
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Document(collection = "students")
+@CompoundIndex(name = "student_unique_fields", def = "{'rollNo':1,'collegeEmail':1,'personalEmail':1,'mobile':1,'aadhaarNumber':1,'panNumber':1}", unique = true)
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
+
+    // ===== Identity =====
     @Id
-    private String id; // ObjectId hex string
-    private String name;
-    private String email;
-    private String course;
-    private int year;
-    private double gpa;
+    @Setter(AccessLevel.NONE)
+    private String id; // MongoDB ObjectId (auto)
+    private String rollNo;
 
-    public Student() {}
+    // ===== Personal Details =====
+    private String firstName;
+    private String lastName;
+    private LocalDate DOB;
 
-    public Student(String name, String email, String course, int year, double gpa) {
-        this.name = name;
-        this.email = email;
-        this.course = course;
-        this.year = year;
-        this.gpa = gpa;
-    }
+    @Builder.Default
+    private String citizenship = "Indian"; // Indian / Other
 
-    // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getCourse() { return course; }
-    public void setCourse(String course) { this.course = course; }
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
-    public double getGpa() { return gpa; }
-    public void setGpa(double gpa) { this.gpa = gpa; }
+    // ===== Contact Details =====
+    private String collegeEmail;
+    private String personalEmail;
+    private String mobile;
+
+    // ===== Address =====
+    private String city;
+    private String state;
+    private String pincode;
+
+    // ===== Education =====
+    private String department; // CSE, IT, ECE
+    @Builder.Default
+    @Setter(AccessLevel.NONE)
+    private String collegeName = "National Institute of Technology, Goa";
+    private Degree highestDegree; // BTECH / MTECH
+    private CurrentYear currentYear; // I, II, III, IV
+    private Integer yearOfPassing;
+    private Double cgpa; // 0.0 – 10.0
+
+    // ===== Social Profiles =====
+    private String linkedinUrl;
+    private String githubUrl;
+    private String portfolioUrl;
+
+    // ===== Documents =====
+    private String resumeLink;
+    private String panNumber;
+    private String aadhaarNumber;
+
+    // ===== Account & Security =====
+    private String password; // Store HASHED password only
+    @Builder.Default
+    private AccountStatus status = AccountStatus.ACTIVE;
+
+    // ===== Audit =====
+    @CreatedDate
+    @Builder.Default
+    @Setter(AccessLevel.NONE)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @LastModifiedDate
+    @Builder.Default
+    @Setter(AccessLevel.NONE)
+    private LocalDateTime updatedAt = LocalDateTime.now();
 }
