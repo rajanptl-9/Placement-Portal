@@ -21,10 +21,10 @@ public class CollegePlacementPortalApplication {
 
     @Bean
     public CommandLineRunner demo(StudentRepository studentRepository,
-                                  CompanyRepository companyRepository,
-                                  JobRepository jobRepository,
-                                  AdminRepository adminRepository,
-                                  ApplicationRepository applicationRepository) {
+            CompanyRepository companyRepository,
+            JobRepository jobRepository,
+            AdminRepository adminRepository,
+            ApplicationRepository applicationRepository) {
         return (args) -> {
             // 1. Create and Save Student
             Student student = Student.builder()
@@ -88,7 +88,7 @@ public class CollegePlacementPortalApplication {
                     .stipend(25000.0)
                     .ctcPackage(0.0)
                     .minimumCgpa(7.5)
-                    .branchesAllowed(List.of("CSE", "IT"))
+                    .branchesAllowed(List.of(Branch.CSE, Branch.ECE, Branch.ME))
                     .eligibleDegree(List.of(EligibleDegree.BTECH))
                     .graduatingYearBtech(2024)
                     .graduatingYearMtech(null)
@@ -116,7 +116,7 @@ public class CollegePlacementPortalApplication {
                     .isActive(true)
                     .lastLoginAt(LocalDateTime.now())
                     .build();
-            
+
             adminRepository.save(admin);
 
             // 5. Create and Save Application
@@ -141,14 +141,20 @@ public class CollegePlacementPortalApplication {
             System.out.println("Citizenship: " + student.getCitizenship());
             System.out.println("Emails: " + student.getCollegeEmail() + " | " + student.getPersonalEmail());
             System.out.println("Mobile: " + student.getMobile());
-            System.out.println("Address: " + student.getCity() + ", " + student.getState() + " - " + student.getPincode());
+            System.out.println(
+                    "Address: " + student.getCity() + ", " + student.getState() + " - " + student.getPincode());
             System.out.println("Education: " + student.getDepartment() + " at " + student.getCollegeName());
-            System.out.println("Degree: " + student.getHighestDegree() + " | Year: " + student.getCurrentYear() + " | Passing: " + student.getYearOfPassing());
+            System.out.println("Degree: " + student.getHighestDegree() + " | Year: " + student.getCurrentYear()
+                    + " | Passing: " + student.getYearOfPassing());
             System.out.println("Performance: CGPA " + student.getCgpa());
-            System.out.println("Social: LinkedIn(" + student.getLinkedinUrl() + "), GitHub(" + student.getGithubUrl() + "), Portfolio(" + student.getPortfolioUrl() + ")");
-            System.out.println("Identity: PAN(" + student.getPanNumber() + "), Aadhaar(" + student.getAadhaarNumber() + ")");
-            System.out.println("Account: Status(" + student.getStatus() + ") | Password(" + student.getPassword() + ")");
-            System.out.println("Audit: Created(" + student.getCreatedAt() + "), Updated(" + student.getUpdatedAt() + ")");
+            System.out.println("Social: LinkedIn(" + student.getLinkedinUrl() + "), GitHub(" + student.getGithubUrl()
+                    + "), Portfolio(" + student.getPortfolioUrl() + ")");
+            System.out.println(
+                    "Identity: PAN(" + student.getPanNumber() + "), Aadhaar(" + student.getAadhaarNumber() + ")");
+            System.out
+                    .println("Account: Status(" + student.getStatus() + ") | Password(" + student.getPassword() + ")");
+            System.out
+                    .println("Audit: Created(" + student.getCreatedAt() + "), Updated(" + student.getUpdatedAt() + ")");
             System.out.println("--------------------------------------");
 
             System.out.println("✅ Company Object Created & Saved:");
@@ -157,12 +163,15 @@ public class CollegePlacementPortalApplication {
             System.out.println("Email: " + company.getCompanyEmail());
             System.out.println("Industry: " + company.getIndustryType());
             System.out.println("Description: " + company.getCompanyDescription());
-            System.out.println("Contacts: Email(" + company.getOfficialEmail() + "), Phone(" + company.getOfficialPhone() + ")");
+            System.out.println(
+                    "Contacts: Email(" + company.getOfficialEmail() + "), Phone(" + company.getOfficialPhone() + ")");
             System.out.println("Website: " + company.getWebsite());
-            System.out.println("Location: " + company.getCity() + ", " + company.getState() + ", " + company.getCountry());
+            System.out.println(
+                    "Location: " + company.getCity() + ", " + company.getState() + ", " + company.getCountry());
             System.out.println("Presence: LinkedIn URL(" + company.getLinkedInUrl() + ")");
             System.out.println("Verification: T&P Verified(" + company.getIsVerifiedByTnp() + ")");
-            System.out.println("Audit: Created(" + company.getCreatedAt() + "), Updated(" + company.getUpdatedAt() + ")");
+            System.out
+                    .println("Audit: Created(" + company.getCreatedAt() + "), Updated(" + company.getUpdatedAt() + ")");
             System.out.println("--------------------------------------");
 
             System.out.println("✅ Job Object Created & Saved:");
@@ -171,32 +180,45 @@ public class CollegePlacementPortalApplication {
             System.out.println("Description: " + job.getJobDescription());
             System.out.println("Company Link ID: " + job.getCompanyId());
             System.out.println("HR Contacts: Email(" + job.getHrEmail() + "), Mobile(" + job.getHrMobileNo() + ")");
-            System.out.println("Type & Mode: Offer(" + job.getOfferType() + "), Job(" + job.getJobMode() + "), Drive(" + job.getDriveMode() + ")");
+            System.out.println("Type & Mode: Offer(" + job.getOfferType() + "), Job(" + job.getJobMode() + "), Drive("
+                    + job.getDriveMode() + ")");
             System.out.println("Compensation: Stipend(" + job.getStipend() + "), CTC(" + job.getCtcPackage() + ")");
-            System.out.println("Eligibility: Min CGPA(" + job.getMinimumCgpa() + "), Branches(" + job.getBranchesAllowed() + "), Degrees(" + job.getEligibleDegree() + ")");
-            System.out.println("Graduating Years: BTech(" + job.getGraduatingYearBtech() + "), MTech(" + job.getGraduatingYearMtech() + ")");
-            System.out.println("Details: Locations(" + job.getJobLocations() + "), Drive Date(" + job.getDriveDate() + "), Openings(" + job.getNumberOfOpenings() + ")");
-            System.out.println("Process: Deadline(" + job.getApplicationDeadline() + "), Upcoming Event(" + job.getUpcomingEvent() + ")");
+            System.out.println("Eligibility: Min CGPA(" + job.getMinimumCgpa() + "), Branches("
+                    + job.getBranchesAllowed() + "), Degrees(" + job.getEligibleDegree() + ")");
+            System.out.println("Graduating Years: BTech(" + job.getGraduatingYearBtech() + "), MTech("
+                    + job.getGraduatingYearMtech() + ")");
+            System.out.println("Details: Locations(" + job.getJobLocations() + "), Drive Date(" + job.getDriveDate()
+                    + "), Openings(" + job.getNumberOfOpenings() + ")");
+            System.out.println("Process: Deadline(" + job.getApplicationDeadline() + "), Upcoming Event("
+                    + job.getUpcomingEvent() + ")");
             System.out.println("Selection: " + job.getSelectionProcessDescription());
             System.out.println("Docs: " + job.getExternalDocLinks());
-            System.out.println("Status: Job Status(" + job.getJobStatus() + ") | Verified(" + job.getIsVerified() + ")");
+            System.out
+                    .println("Status: Job Status(" + job.getJobStatus() + ") | Verified(" + job.getIsVerified() + ")");
             System.out.println("Audit: Created(" + job.getCreatedAt() + "), Updated(" + job.getUpdatedAt() + ")");
             System.out.println("--------------------------------------");
 
             System.out.println("✅ Admin Object Created & Saved:");
             System.out.println("ID: " + admin.getId());
             System.out.println("Name: " + admin.getName());
-            System.out.println("Account: Username(" + admin.getUsername() + "), Email(" + admin.getEmail() + "), Mobile(" + admin.getMobile() + ")");
-            System.out.println("Auth: Password(" + admin.getPassword() + "), Role(" + admin.getRole() + "), Active(" + admin.getIsActive() + ")");
-            System.out.println("Audit: Last Login(" + admin.getLastLoginAt() + "), Created(" + admin.getCreatedAt() + "), Updated(" + admin.getUpdatedAt() + ")");
+            System.out.println("Account: Username(" + admin.getUsername() + "), Email(" + admin.getEmail()
+                    + "), Mobile(" + admin.getMobile() + ")");
+            System.out.println("Auth: Password(" + admin.getPassword() + "), Role(" + admin.getRole() + "), Active("
+                    + admin.getIsActive() + ")");
+            System.out.println("Audit: Last Login(" + admin.getLastLoginAt() + "), Created(" + admin.getCreatedAt()
+                    + "), Updated(" + admin.getUpdatedAt() + ")");
             System.out.println("--------------------------------------");
 
             System.out.println("✅ Application Object Created & Saved:");
             System.out.println("ID: " + application.getId());
-            System.out.println("Links: Job ID(" + application.getJobId() + "), Student ID(" + application.getStudentId() + ")");
-            System.out.println("Status: Application(" + application.getApplicationStatus() + "), Offer(" + application.getOfferStatus() + ")");
-            System.out.println("Details: Remark(" + application.getRemark() + "), Admin Verified(" + application.getVerifiedByAdmin() + ")");
-            System.out.println("Audit: Applied at(" + application.getAppliedAt() + "), Updated at(" + application.getUpdatedAt() + ")");
+            System.out.println(
+                    "Links: Job ID(" + application.getJobId() + "), Student ID(" + application.getStudentId() + ")");
+            System.out.println("Status: Application(" + application.getApplicationStatus() + "), Offer("
+                    + application.getOfferStatus() + ")");
+            System.out.println("Details: Remark(" + application.getRemark() + "), Admin Verified("
+                    + application.getVerifiedByAdmin() + ")");
+            System.out.println("Audit: Applied at(" + application.getAppliedAt() + "), Updated at("
+                    + application.getUpdatedAt() + ")");
             System.out.println("--------------------------------------");
         };
     }
