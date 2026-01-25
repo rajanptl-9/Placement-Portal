@@ -25,12 +25,11 @@ public class Company {
 
     /* ================= BASIC DETAILS ================= */
     private String companyName;
-    private String companyEmail; // from image
     private String companyDescription;
-    private IndustryType industryType; // IT, Finance, Core, etc.
+    private IndustryType industryType;
 
     /* ================= CONTACT DETAILS ================= */
-    private String officialEmail;
+    private String companyEmail;
     private String officialPhone;
     private String website;
 

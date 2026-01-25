@@ -35,9 +35,9 @@ public class Application {
 
     private String remark;
 
-    @Builder.Default
-    @Setter(AccessLevel.NONE)
-    private Boolean verifiedByAdmin = false;
+    // @Builder.Default
+    // @Setter(AccessLevel.NONE)
+    // private Boolean verifiedByAdmin = false;
 
     @CreatedDate
     @Builder.Default
