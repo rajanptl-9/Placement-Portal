@@ -37,4 +37,8 @@ obj/
 
 # OS files
 Thumbs.db
+<<<<<<< HEAD
 .DS_Store
+=======
+.DS_Store
+>>>>>>> feature/models
