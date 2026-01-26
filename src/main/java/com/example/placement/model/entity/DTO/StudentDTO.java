@@ -25,9 +25,9 @@ public class StudentDTO {
     private String status;
 
     public static StudentDTO from(Student student) {
-        if (student == null) {
+        if (student == null)
             return null;
-        }
+
         return new StudentDTO(
                 student.getId(),
                 student.getRollNo(),
