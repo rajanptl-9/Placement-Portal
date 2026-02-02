@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@CompoundIndex(name = "job_unique_fields", def = "{'companyId':1,'hrEmail':1, 'hrMobileNo':1, }", unique = true)
+@CompoundIndex(name = "job_unique_fields", def = "{'companyId':1,'hrEmail':1, 'hrMobileNo':1}", unique = true)
 @Data
 @Builder
 @NoArgsConstructor

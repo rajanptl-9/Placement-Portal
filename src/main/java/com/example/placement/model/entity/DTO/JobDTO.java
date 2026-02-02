@@ -1,8 +1,6 @@
 package com.example.placement.model.entity.DTO;
 
-import java.time.LocalDate;
-import java.util.List;
-
+import com.example.placement.model.entity.Job;
 import com.example.placement.model.entity.enums.Branch;
 import com.example.placement.model.entity.enums.DriveMode;
 import com.example.placement.model.entity.enums.EligibleDegree;
@@ -10,6 +8,18 @@ import com.example.placement.model.entity.enums.JobMode;
 import com.example.placement.model.entity.enums.OfferType;
 import com.example.placement.model.entity.enums.UpcomingEvent;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class JobDTO {
     private String id;
     private String jobTitle;
@@ -34,4 +44,34 @@ public class JobDTO {
     private List<String> externalDocLinks;
     private String jobStatus;
     private Boolean isVerified;
+
+    public static JobDTO from(Job job) {
+        if (job == null)
+            return null;
+        return JobDTO.builder()
+                .id(job.getId())
+                .jobTitle(job.getJobTitle())
+                .jobDescription(job.getJobDescription())
+                .companyId(job.getCompanyId())
+                .offerType(job.getOfferType())
+                .jobMode(job.getJobMode())
+                .driveMode(job.getDriveMode())
+                .stipend(job.getStipend())
+                .ctcPackage(job.getCtcPackage())
+                .minimumCgpa(job.getMinimumCgpa())
+                .branchesAllowed(job.getBranchesAllowed())
+                .eligibleDegree(job.getEligibleDegree())
+                .graduatingYearBtech(job.getGraduatingYearBtech())
+                .graduatingYearMtech(job.getGraduatingYearMtech())
+                .jobLocations(job.getJobLocations())
+                .driveDate(job.getDriveDate())
+                .numberOfOpenings(job.getNumberOfOpenings())
+                .applicationDeadline(job.getApplicationDeadline())
+                .selectionProcessDescription(job.getSelectionProcessDescription())
+                .upcomingEvent(job.getUpcomingEvent())
+                .externalDocLinks(job.getExternalDocLinks())
+                .jobStatus(job.getJobStatus())
+                .isVerified(job.getIsVerified())
+                .build();
+    }
 }
