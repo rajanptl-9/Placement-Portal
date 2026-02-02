@@ -5,9 +5,11 @@ import com.example.placement.model.entity.enums.Branch;
 import com.example.placement.model.entity.enums.DriveMode;
 import com.example.placement.model.entity.enums.EligibleDegree;
 import com.example.placement.model.entity.enums.JobMode;
+import com.example.placement.model.entity.enums.JobStatus;
 import com.example.placement.model.entity.enums.OfferType;
 import com.example.placement.model.entity.enums.UpcomingEvent;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,11 +22,14 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JobDTO {
     private String id;
     private String jobTitle;
     private String jobDescription;
     private String companyId;
+    private String hrEmail;
+    private String hrMobileNo;
     private OfferType offerType;
     private JobMode jobMode;
     private DriveMode driveMode;
@@ -42,7 +47,7 @@ public class JobDTO {
     private String selectionProcessDescription;
     private UpcomingEvent upcomingEvent;
     private List<String> externalDocLinks;
-    private String jobStatus;
+    private JobStatus jobStatus;
     private Boolean isVerified;
 
     public static JobDTO from(Job job) {
@@ -53,6 +58,8 @@ public class JobDTO {
                 .jobTitle(job.getJobTitle())
                 .jobDescription(job.getJobDescription())
                 .companyId(job.getCompanyId())
+                .hrEmail(job.getHrEmail())
+                .hrMobileNo(job.getHrMobileNo())
                 .offerType(job.getOfferType())
                 .jobMode(job.getJobMode())
                 .driveMode(job.getDriveMode())

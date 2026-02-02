@@ -28,4 +28,15 @@ public class CompanyCardDTO {
                 .website(company.getWebsite())
                 .build();
     }
+
+    public static CompanyCardDTO from(CompanyDTO companyDTO) {
+        if (companyDTO == null)
+            return null;
+        return CompanyCardDTO.builder()
+                .companyName(companyDTO.getCompanyName())
+                .industryType(companyDTO.getIndustryType())
+                .city(companyDTO.getCity())
+                .website(companyDTO.getWebsite())
+                .build();
+    }
 }

@@ -3,6 +3,7 @@ package com.example.placement.model.entity.DTO;
 import com.example.placement.model.entity.Company;
 import com.example.placement.model.entity.enums.IndustryType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyDTO {
     private String id;
     private String companyName;

@@ -12,6 +12,7 @@ import com.example.placement.model.entity.enums.Branch;
 import com.example.placement.model.entity.enums.DriveMode;
 import com.example.placement.model.entity.enums.EligibleDegree;
 import com.example.placement.model.entity.enums.JobMode;
+import com.example.placement.model.entity.enums.JobStatus;
 import com.example.placement.model.entity.enums.OfferType;
 import com.example.placement.model.entity.enums.UpcomingEvent;
 
@@ -76,7 +77,7 @@ public class Job {
     /* ===== STATUS & AUDIT ===== */
     @Builder.Default
     @Setter(AccessLevel.NONE)
-    private String jobStatus = "OPEN"; // OPEN / CLOSED / ON_HOLD
+    private JobStatus jobStatus = JobStatus.OPEN; // OPEN / CLOSED / ON_HOLD
 
     @Builder.Default
     @Setter(AccessLevel.NONE)

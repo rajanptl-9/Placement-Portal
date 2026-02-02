@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.http.MediaType;
 import java.util.List;
-
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -41,8 +41,8 @@ public class JobController {
         }
     }
 
-    @PostMapping
-    public CompletableFuture<ResponseEntity<JobDTO>> createJob(@RequestBody Job job) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CompletableFuture<ResponseEntity<JobDTO>> createJob(@RequestBody JobDTO job) {
         try {
             return jobService.createJob(job).thenApply(ResponseEntity::ok);
         } catch (Exception e) {
@@ -61,8 +61,8 @@ public class JobController {
         }
     }
 
-    @PutMapping("/{id}")
-    public CompletableFuture<ResponseEntity<Job>> updateJob(@PathVariable String id, @RequestBody Job jobDetails) {
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CompletableFuture<ResponseEntity<Job>> updateJob(@PathVariable String id, @RequestBody JobDTO jobDetails) {
         try {
             return jobService.updateJob(id, jobDetails)
                     .thenApply(opt -> opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build()));

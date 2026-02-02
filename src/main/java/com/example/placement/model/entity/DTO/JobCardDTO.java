@@ -41,4 +41,19 @@ public class JobCardDTO {
                 .company(CompanyCardDTO.from(company))
                 .build();
     }
+
+    public static JobCardDTO from(Job job, CompanyDTO companyDTO) {
+        if (job == null)
+            return null;
+        return JobCardDTO.builder()
+                .id(job.getId())
+                .jobTitle(job.getJobTitle())
+                .offerType(job.getOfferType())
+                .jobMode(job.getJobMode())
+                .ctcPackage(job.getCtcPackage())
+                .jobLocations(job.getJobLocations())
+                .applicationDeadline(job.getApplicationDeadline())
+                .company(CompanyCardDTO.from(companyDTO))
+                .build();
+    }
 }

@@ -33,4 +33,18 @@ public class CompanyProfileDTO {
                 .isVerifiedByTnp(company.getIsVerifiedByTnp())
                 .build();
     }
+
+    public static CompanyProfileDTO from(CompanyDTO companyDTO) {
+        if (companyDTO == null)
+            return null;
+        return CompanyProfileDTO.builder()
+                .companyName(companyDTO.getCompanyName())
+                .companyEmail(companyDTO.getCompanyEmail())
+                .companyDescription(companyDTO.getCompanyDescription())
+                .industryType(companyDTO.getIndustryType())
+                .website(companyDTO.getWebsite())
+                .linkedInUrl(companyDTO.getLinkedInUrl())
+                .isVerifiedByTnp(companyDTO.getIsVerifiedByTnp())
+                .build();
+    }
 }
