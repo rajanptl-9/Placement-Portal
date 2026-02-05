@@ -51,7 +51,10 @@ public class StudentController {
         }
     }
 
-    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    // @PostMapping(value = "/register", consumes =
+    // MediaType.APPLICATION_JSON_VALUE, produces =
+    // MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register")
     public CompletableFuture<ResponseEntity<?>> register(@RequestBody Student req) {
         try {
             return studentService.registerStudent(req).handle((dto, ex) -> {
@@ -83,7 +86,7 @@ public class StudentController {
         }
     }
 
-    @PostMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CompletableFuture<ResponseEntity<?>> updateProfile(@PathVariable String id, @RequestBody Student req) {
         try {
             return studentService.updateStudentProfile(id, req).handle((dto, ex) -> {
